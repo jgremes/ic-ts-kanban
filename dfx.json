@@ -1,0 +1,13 @@
+{
+    "canisters": {
+        "kanban": {
+            "type": "custom",
+            "build": "npx azle kanban",
+            "root": "src",
+            "ts": "src/index.ts",
+            "candid": "src/index.did",
+            "wasm": ".azle/kanban/kanban.wasm.gz"
+        }
+    }
+}
+

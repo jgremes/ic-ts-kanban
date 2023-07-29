@@ -1,0 +1,20 @@
+{
+    "scripts": {
+        "dfx_install": "DFX_VERSION=0.14.0 sh -ci \"$(curl -fsSL https://sdk.dfinity.org/install.sh)\"",
+        "replica_start": "dfx start --background",
+        "replica_stop": "dfx stop",
+        "canister_deploy_local": "dfx deploy kanban",
+        "canister_deploy_mainnet": "dfx deploy --network ic kanban",
+        "canister_uninstall": "dfx canister uninstall-code kanban",
+        "canister_call_add_kanban_card"   : "dfx canister call kanban addKanbanCard '(record { description = \"Example card\"; assignee = \"Peter X\"; deadline = 20233112 })'",
+        "canister_call_get_kanban_cards"   : "dfx canister call kanban getKanbanCards"
+    },
+    "dependencies": {
+        "azle": "0.16.3",
+        "uuid": "^9.0.0"
+    },
+    "devDependencies": {
+        "@types/uuid": "^9.0.1"
+      }
+}
+

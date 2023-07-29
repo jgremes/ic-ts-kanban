@@ -1,0 +1,48 @@
+type Configuration = record { initialStage : text };
+type KanbanCard = record {
+  id : text;
+  assignee : text;
+  createdAt : nat64;
+  description : text;
+  deadline : nat64;
+  updatedAt : opt nat64;
+  stage : text;
+};
+type KanbanCardPayload = record {
+  assignee : text;
+  description : text;
+  deadline : nat64;
+};
+type StageTransition = record {
+  id : text;
+  createdAt : nat64;
+  updatedAt : opt nat64;
+  stage_from : text;
+  stage_to : text;
+};
+type StageTransitionPayload = record { stage_from : text; stage_to : text };
+type _AzleResult = variant { Ok : StageTransition; Err : text };
+type _AzleResult_1 = variant { Ok : KanbanCard; Err : text };
+type _AzleResult_2 = variant { Ok : Configuration; Err : text };
+type _AzleResult_3 = variant { Ok : vec StageTransition; Err : text };
+type _AzleResult_4 = variant { Ok : vec KanbanCard; Err : text };
+type _AzleResult_5 = variant { Ok : text; Err : text };
+service : () -> {
+  addDisallowedStageTransition : (StageTransitionPayload) -> (_AzleResult);
+  addKanbanCard : (KanbanCardPayload) -> (_AzleResult_1);
+  deleteDisallowedStageTransition : (text) -> (_AzleResult);
+  deleteKanbanCard : (text) -> (_AzleResult_1);
+  getConfiguration : () -> (_AzleResult_2) query;
+  getDisallowedStageTransition : (text) -> (_AzleResult) query;
+  getDisallowedStageTransitions : () -> (_AzleResult_3) query;
+  getKanbanCard : (text) -> (_AzleResult_1) query;
+  getKanbanCards : () -> (_AzleResult_4) query;
+  getKanbanCardsByAssignee : (text) -> (_AzleResult_4) query;
+  getKanbanCardsByStage : (text) -> (_AzleResult_4) query;
+  setConfiguration : (Configuration) -> (_AzleResult_2);
+  updateDisallowedStageTransition : (text, StageTransitionPayload) -> (
+      _AzleResult,
+    );
+  updateKanbanCard : (text, KanbanCardPayload) -> (_AzleResult_1);
+  updateKanbanCardStage : (text, text) -> (_AzleResult_5);
+}
